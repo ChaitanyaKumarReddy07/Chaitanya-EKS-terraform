@@ -29,7 +29,7 @@ pipeline {
 
         stage('Git Pulling') {
             steps {
-                git branch: 'master', url: 'https://github.com/ChaitanyaKumarReddy07/Chaitanya-EKS-terraform.git'
+                git branch: 'k8sgpt-demo', url: 'https://github.com/ChaitanyaKumarReddy07/Chaitanya-EKS-terraform.git'
             }
         }
 
