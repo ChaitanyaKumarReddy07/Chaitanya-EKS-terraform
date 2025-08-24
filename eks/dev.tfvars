@@ -25,28 +25,30 @@ endpoint-private-access    = false
 endpoint-public-access     = true
 ondemand_instance_types    = ["t3a.medium"]
 spot_instance_types        = ["c5a.large", "c5a.xlarge", "m5a.large", "m5a.xlarge", "c5.large", "m5.large", "t3a.large", "t3a.xlarge", "t3a.medium"]
-desired_capacity_on_demand = "1"
-min_capacity_on_demand     = "1"
-max_capacity_on_demand     = "5"
-desired_capacity_spot      = "1"
-min_capacity_spot          = "1"
-max_capacity_spot          = "10"
+
+desired_capacity_on_demand = 1
+min_capacity_on_demand     = 1
+max_capacity_on_demand     = 5
+
+desired_capacity_spot      = 1
+min_capacity_spot          = 1
+max_capacity_spot          = 10
+
 addons = [
   {
-    name    = "vpc-cni",
+    name    = "vpc-cni"
     version = "v1.20.0-eksbuild.1"
   },
   {
-    name    = "coredns",
+    name    = "coredns"
     version = "v1.12.2-eksbuild.4"
   },
   {
-    name    = "kube-proxy",
+    name    = "kube-proxy"
     version = "v1.33.0-eksbuild.2"
   },
   {
-    name    = "aws-ebs-csi-driver",
+    name    = "aws-ebs-csi-driver"
     version = "v1.46.0-eksbuild.1"
   }
-  # Add more addons as needed
 ]
