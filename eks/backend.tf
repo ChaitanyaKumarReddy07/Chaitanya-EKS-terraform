@@ -7,10 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "chaitanya-tf-bucket"
+    bucket         = "dev-chaitanya-tf-bucket"   # use the exact bucket name
     region         = "ap-southeast-2"              
     key            = "eks/terraform.tfstate"
-    dynamodb_table = "chaitanya-tf-lock"          
+    dynamodb_table = "chaitanya-tf-locks"        # exact table name with 's'
     encrypt        = true
   }
 }
