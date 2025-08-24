@@ -6,11 +6,12 @@ terraform {
       version = "~> 5.49.0"
     }
   }
+
   backend "s3" {
-    bucket         = "dev-aman-tf-bucket"
-    region         = "us-east-1"
-    key            = "eks/terraform.tfstate"
-    dynamodb_table = "Lock-Files"
+    bucket         = "dev-chaitanya-tf-bucket"    # Ensure this bucket exists in ap-southeast-2
+    region         = "ap-southeast-2"             # Region of the bucket and DynamoDB
+    key            = "eks/terraform.tfstate"      # Path inside the bucket for tfstate
+    dynamodb_table = "chaitanya-tf-locks"         # Ensure the exact table name exists in same region
     encrypt        = true
   }
 }
