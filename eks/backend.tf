@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.9.3"
+  required_version = ">= 1.9.3, <= 1.13.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -8,10 +8,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "dev-chaitanya-tf-bucket"    # Ensure this bucket exists in ap-southeast-2
-    region         = "ap-southeast-2"             # Region of the bucket and DynamoDB
-    key            = "eks/terraform.tfstate"      # Path inside the bucket for tfstate
-    dynamodb_table = "chaitanya-tf-locks"         # Ensure the exact table name exists in same region
+    bucket         = "dev-chaitanya-tf-bucket"
+    region         = "ap-southeast-2"
+    key            = "eks/terraform.tfstate"
+    dynamodb_table = "chaitanya-tf-locks"
     encrypt        = true
   }
 }
