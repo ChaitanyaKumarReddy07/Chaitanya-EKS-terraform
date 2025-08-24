@@ -33,10 +33,24 @@ pipeline {
             }
         }
 
+        stage('AWS Credentials Check') {
+            steps {
+                withAWS(credentials: 'aws-creds', region: "${env.AWS_REGION}") {
+                    // Print AWS caller identity
+                    sh 'aws sts get-caller-identity'
+
+                    // Check if S3 bucket is accessible
+                    sh '''
+                      aws s3api head-object --bucket dev-chaitanya-tf-bucket --key eks/terraform.tfstate && echo "S3 bucket access: SUCCESS" || echo "S3 bucket access: FAILED"
+                    '''
+                }
+            }
+        }
+
         stage('Init') {
             steps {
                 withAWS(credentials: 'aws-creds', region: "${env.AWS_REGION}") {
-                    sh 'terraform -chdir=eks/ init'
+                    sh 'terraform -chdir=eks/ init -reconfigure'
                 }
             }
         }
@@ -54,11 +68,9 @@ pipeline {
                 withAWS(credentials: 'aws-creds', region: "${env.AWS_REGION}") {
                     script {
                         def tfCommand = "terraform -chdir=eks/ ${params.Terraform_Action} -var-file=${params.Environment}.tfvars"
-                        
                         if (params.Terraform_Action == 'apply' || params.Terraform_Action == 'destroy') {
                             tfCommand += " -auto-approve"
                         }
-
                         sh tfCommand
                     }
                 }
