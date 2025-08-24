@@ -7,10 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "dev-aman-tf-bucket"
-    region         = "us-east-1"
+    bucket         = "chaitanya-tf-bucket"
+    region         = "ap-southeast-2"              
     key            = "eks/terraform.tfstate"
-    dynamodb_table = "Lock-Files"
+    dynamodb_table = "chaitanya-tf-lock"          
     encrypt        = true
   }
 }
